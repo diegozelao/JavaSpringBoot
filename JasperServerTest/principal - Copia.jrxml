@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="principal" pageWidth="595" pageHeight="802" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="04993fe1-f98f-4db6-a991-1c45688ef1f8">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="zebrado">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT} % 2 != 0 && "true".equals($P{zebrado})]]></conditionExpression>
+			<style mode="Opaque" backcolor="#EDEDED" fill="Solid" isBlankWhenNull="false" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="includes" class="java.lang.String" isForPrompting="false" evaluationTime="Early">
+		<parameterDescription><![CDATA[Caminho relativo para os arquivos default dos relatorios de contabilidade e tesouraria]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{REPORT_CLASS_LOADER}.getResource("../../retrato/")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nomerelatorio" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Nome do relatório que será exibido no cabeçalho]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="exercicio" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Exercício selecionado no acesso ao sistema]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="exercicio_2d" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Dois ultimos dígitos do exercício acessado pelo sistema. Usado para formular o nome correto das tabelas CPs]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{exercicio}.substring(2,4)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="entidade" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Entidades selecionadas no filtro para geração do relatório]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="zebrado" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Checkbox na tela de filtro para optar pelo relatório zebrado ou todo em branco]]></parameterDescription>
+	</parameter>
+	<parameter name="usuario" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Nome do usuário logado para exibição no rodapé]]></parameterDescription>
+	</parameter>
+	<parameter name="tipo_arquivo_relatorio" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Recebe valor da classe Jasper.php com o tipo de arquivo a ser gerado 1 é PDF, por exemplo]]></parameterDescription>
+	</parameter>
+	<parameter name="oculta_cabecalho_rodape" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Opção para imprimir rodapé em todas ou só na última página conforme tipo de arquivo gerado]]></parameterDescription>
+	</parameter>
+	<parameter name="opcoes_assinatura" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Recebe a opção de tipos de assinaturas a serem impressas no final do relatório]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="notas_grupo" class="java.lang.Integer" isForPrompting="false">
+		<parameterDescription><![CDATA[Utilizado para filtrar as notas explicativas no campo fn_grupo]]></parameterDescription>
+	</parameter>
+	<parameter name="notas_programa" class="java.lang.Integer" isForPrompting="false">
+		<parameterDescription><![CDATA[Utilizado para filtrar as notas explicativas no campo fn_programa]]></parameterDescription>
+	</parameter>
+	<parameter name="data_inicial" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Pode receber mes ou data no formato americano para filtro nos SQLs]]></parameterDescription>
+	</parameter>
+	<parameter name="data_final" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Assim como a data inicial, pode receber mes ou data no formato americano para filtro nos SQLs]]></parameterDescription>
+	</parameter>
+	<parameter name="filtro_cabecalho" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Recebe através através de post os filtros utilizados na geração e exibe os mesmos no cabeçalho]]></parameterDescription>
+	</parameter>
+	<parameter name="nomesistema" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[Caso seja necessário utilizar o nome do sistema em algum local, como o rodapé, por exemplo]]></parameterDescription>
+	</parameter>
+	<parameter name="ano_inicial" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ano_final" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="orgao" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="unidade" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="credor_inicial" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="credor_final" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="recurso" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="recurso_contra" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ordenacao" class="java.lang.String" isForPrompting="false"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="ep_ano_empenho" class="java.math.BigDecimal"/>
+	<field name="ep_nro_empenho" class="java.math.BigDecimal"/>
+	<field name="ep_ent_empenho" class="java.math.BigDecimal"/>
+	<field name="nome" class="java.lang.String"/>
+	<title>
+		<band height="30">
+			<textField>
+				<reportElement x="90" y="0" width="360" height="30" uuid="55a5f4e8-4b5c-4aa5-a6d9-fcf1c47d6ed1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="12" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="0" width="555" height="12" uuid="d99e6b4b-cb17-4baa-a361-87303dd929f1">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box bottomPadding="0">
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textField>
+					<reportElement x="0" y="0" width="180" height="12" uuid="8e2504cb-c24c-46c3-8474-dd8f5407a27b">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Entidade"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="180" y="0" width="194" height="12" uuid="996a43e0-d68d-4527-8b6d-063bb71e5ff3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Nro. Empenho"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="374" y="0" width="181" height="12" uuid="0599e226-8284-4df5-8384-2d976c37b202">
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Ano Empenho"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<frame>
+				<reportElement style="zebrado" x="0" y="0" width="555" height="12" uuid="3c11c237-8f88-4bf3-ad34-a713a14c8ac1"/>
+				<textField>
+					<reportElement x="0" y="0" width="180" height="12" uuid="942beca5-72a3-405d-8a38-77ef895ce9f9"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ep_ent_empenho}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="180" y="0" width="194" height="12" uuid="21c52b81-2cb8-4480-bed9-4eb89bce8724"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ep_nro_empenho}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="374" y="0" width="181" height="12" uuid="02b0a04c-f07d-47f3-b8d3-7cb92a2dfb96"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ep_ano_empenho}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>
